@@ -1,0 +1,68 @@
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.bg {
+  height: 100vh;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.logo {
+  margin-top: 24px;
+}
+
+.btn-news {
+  border-radius: 10px;
+  background-color: #7d6d61;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+  font-weight: 500;
+  line-height: 13px;
+  text-align: center;
+  font-size: 4rem;
+  width: 135px;
+  height: 100px;
+}
+
+.btn-stats {
+  border-radius: 10px;
+  background-color: #7d6d61;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+  font-weight: 500;
+  line-height: 13px;
+  text-align: center;
+  font-size: 4rem;
+  width: 135px;
+  height: 100px;
+}
+
+.btn-play {
+  border-radius: 10px;
+  background-color: #7d6d61;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+  font-weight: 500;
+  line-height: 13px;
+  text-align: center;
+  font-size: 55px;
+  width: 355px;
+  height: 80px;
+}
+
+.bottom-item {
+  padding: 0;
+}
+
+.bottom-panel {
+  margin-top: 64px;
+}
+
+.stats {
+  margin-top: 64px;
+}
+
+.button-group {
+  margin-top: 64px
+}

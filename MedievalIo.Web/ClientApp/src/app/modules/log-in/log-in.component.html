@@ -1,0 +1,26 @@
+<div class="login-page">
+  <div class="form">
+    <form class="register-form">
+      <input type="text" placeholder="name" />
+      <input type="password" placeholder="password" />
+      <input type="text" placeholder="email address" />
+      <button>create</button>
+      <p class="message">Already registered? <a href="#">Sign In</a></p>
+    </form>
+    <form class="login-form" #ngForm="ngForm" (ngSubmit)="ngForm.form.valid && onSubmit(ngForm)">
+      <input class="form-control" name="UserEmail" autofocus="autofocus" placeholder="Email Address" type="email"
+             #email="ngModel"
+             [ngClass]="{ 'is-invalid': ngForm.submitted && email.invalid }"
+             [(ngModel)]="model.userEmail"
+             pattern="^[+a-z0-9._-]+@[a-z0-9_-]+\.[a-z]{2,}$"
+             required />
+      <input class="form-control" name="Password" autocomplete="off" placeholder="Password" type="password"
+             #password="ngModel"
+             [ngClass]="{ 'is-invalid': ngForm.submitted && password.invalid }"
+             [(ngModel)]="model.password"
+             required />
+      <button type="submit">login</button>
+      <p class="message">Not registered? <a href="#">Create an account</a></p>
+    </form>
+  </div>
+</div>
