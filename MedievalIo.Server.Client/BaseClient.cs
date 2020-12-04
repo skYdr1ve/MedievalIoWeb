@@ -48,7 +48,7 @@ namespace MedievalIo.Server.Client
             return await SendRequestAsync<T>(client, request);
         }
 
-        protected async Task<T> SendGetRequestAsync<T>(ApiRequestModel apiRequestModel, string requestUrl, object requestBody)
+        protected async Task<T> SendGetRequestAsync<T>(ApiRequestModel apiRequestModel, string requestUrl, object requestBody = null)
         {
             var client = GetOrCreateHttpClient(apiRequestModel.BaseUrl);
 
