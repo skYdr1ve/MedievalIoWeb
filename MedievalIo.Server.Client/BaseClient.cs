@@ -34,7 +34,35 @@ namespace MedievalIo.Server.Client
             return await SendRequestAsync<T>(client, request);
         }
 
-        private async Task<T> SendRequestAsync<T>(HttpClient httpClient, HttpRequestMessage request)
+        protected async Task<T> SendPutRequestAsync<T>(ApiRequestModel apiRequestModel, string requestUrl, object requestBody)
+        {
+            var client = GetOrCreateHttpClient(apiRequestModel.BaseUrl);
+
+            var request = new HttpRequestMessage(HttpMethod.Put, requestUrl)
+            {
+                Content = _jsonSerializer.SerializeAsync(requestBody)
+            };
+
+            request.Headers.Add(AuthenticationHeaderName, apiRequestModel.Bearer);
+
+            return await SendRequestAsync<T>(client, request);
+        }
+
+        protected async Task<T> SendGetRequestAsync<T>(ApiRequestModel apiRequestModel, string requestUrl, object requestBody)
+        {
+            var client = GetOrCreateHttpClient(apiRequestModel.BaseUrl);
+
+            var request = new HttpRequestMessage(HttpMethod.Get, requestUrl)
+            {
+                Content = _jsonSerializer.SerializeAsync(requestBody)
+            };
+
+            request.Headers.Add(AuthenticationHeaderName, apiRequestModel.Bearer);
+
+            return await SendRequestAsync<T>(client, request);
+        }
+
+        protected async Task<T> SendRequestAsync<T>(HttpClient httpClient, HttpRequestMessage request)
         {
             using (var response = await httpClient.SendAsync(request))
             {
