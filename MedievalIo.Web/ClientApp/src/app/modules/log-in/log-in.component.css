@@ -1,13 +1,24 @@
+.page {
+  height: 100%;
+  background-image: url('../../../../../wwwroot/images/fon.jpg');
+}
+
 .login-page {
   width: 360px;
-  padding: 8% 0 0;
+  padding: 5% 0 0;
   margin: auto;
+  
+}
+
+.logo {
+  margin: auto;
+  margin-top: 2ch;
 }
 
 .form {
   position: relative;
   z-index: 1;
-  background: #FFFFFF;
+  background: rgba(125, 109, 97, 0.8);
   max-width: 360px;
   margin: 0 auto 100px;
   padding: 45px;
@@ -56,10 +67,6 @@
       color: #4CAF50;
       text-decoration: none;
     }
-
-  .form .register-form {
-    display: none;
-  }
 
 .container {
   position: relative;
@@ -110,4 +117,8 @@ body {
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.register-link {
+  cursor: pointer;
 }

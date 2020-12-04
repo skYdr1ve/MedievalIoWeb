@@ -4,6 +4,7 @@ import { LoginModel } from '../../models/login.model';
 import { AuthenticatedUserModel } from '../../models/authenticated-user.model';
 import { UserSessionManager } from './user-session.manager';
 import { CookieService } from 'ngx-cookie-service';
+import { RegisterModel } from "../../models/register.model";
 
 @Injectable({
   providedIn: 'root'
@@ -49,4 +50,10 @@ export class AuthService {
       next(result);
     });
   }
+
+  register(registerModel: RegisterModel) {
+    return this.http.post<any>('Authentication/Register', registerModel);
+  }
+
+  
 }

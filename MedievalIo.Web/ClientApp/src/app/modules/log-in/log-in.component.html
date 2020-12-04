@@ -1,26 +1,66 @@
-<div class="login-page">
-  <div class="form">
-    <form class="register-form">
-      <input type="text" placeholder="name" />
-      <input type="password" placeholder="password" />
-      <input type="text" placeholder="email address" />
-      <button>create</button>
-      <p class="message">Already registered? <a href="#">Sign In</a></p>
-    </form>
-    <form class="login-form" #ngForm="ngForm" (ngSubmit)="ngForm.form.valid && onSubmit(ngForm)">
-      <input class="form-control" name="UserEmail" autofocus="autofocus" placeholder="Email Address" type="email"
-             #email="ngModel"
-             [ngClass]="{ 'is-invalid': ngForm.submitted && email.invalid }"
-             [(ngModel)]="model.userEmail"
-             pattern="^[+a-z0-9._-]+@[a-z0-9_-]+\.[a-z]{2,}$"
-             required />
-      <input class="form-control" name="Password" autocomplete="off" placeholder="Password" type="password"
-             #password="ngModel"
-             [ngClass]="{ 'is-invalid': ngForm.submitted && password.invalid }"
-             [(ngModel)]="model.password"
-             required />
-      <button type="submit">login</button>
-      <p class="message">Not registered? <a href="#">Create an account</a></p>
-    </form>
+<div class="page">
+  <div class="container-fluid">
+    <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+      <div class="col-12 text-center">
+        <img border="0" alt="MedievalIo" class="img-fluid logo"
+             src="images/medievalIo.png" />
+      </div>
+    </div>
+  </div>
+  <div class="login-page">
+    <div class="form">
+      <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmitForm()" *ngIf="isRegister">
+        <div class="form-group">
+          <input type="text"
+                 placeholder="Name"
+                 formControlName="name"
+                 autocomplete="off"
+                 class="form-control"/>
+          <input type="text"
+                 placeholder="Email Address"
+                 formControlName="email"
+                 autocomplete="off"
+                 class="form-control"/>
+          <input id="passwordInput"
+                 type="password"
+                 formControlName="password"
+                 pattern="^((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])|(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^a-zA-Z0-9])|(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])).{8,}$"
+                 autocomplete="off"
+                 placeholder="New Password"
+                 class="form-control"/>
+          <mat-error *ngIf="registerForm.get('password').hasError('pattern') && (registerForm.get('password').dirty || registerForm.get('password').touched)">Passwords must be at least 8 characters and contain at 3 of 4 of the following: upper case (A-Z), lower case (a-z), number (0-9) and special character (e.g. !@@#$%^&*)</mat-error>
+          <mat-error *ngIf="registerForm.get('password').hasError('required') && (registerForm.get('password').dirty || registerForm.get('password').touched)">Please fill out this field.</mat-error>
+        </div>
+        <div class="form-group">
+          <input id="confirmedPasswordInput"
+                 type="password"
+                 formControlName="confirmedPassword"
+                 autocomplete="off"
+                 pattern="{{ password.value }}"
+                 placeholder="Confirm Password"
+                 class="form-control"/>
+          <mat-error *ngIf="registerForm.get('confirmedPassword').hasError('pattern') && (registerForm.get('confirmedPassword').dirty || registerForm.get('confirmedPassword').touched)">Please enter the same Password as above</mat-error>
+          <mat-error *ngIf="registerForm.get('confirmedPassword').hasError('required') && (registerForm.get('confirmedPassword').dirty || registerForm.get('confirmedPassword').touched)">Please fill out this field.</mat-error>
+        </div>
+        <button type="submit">create</button>
+        <p class="message">Already registered? <a class="register-link" (click)="changeForm()">Sign In</a></p>
+      </form>
+      <form class="login-form" #ngForm="ngForm" (ngSubmit)="ngForm.form.valid && onSubmit(ngForm)" *ngIf="!isRegister">
+        <input class="form-control" name="UserEmail" autofocus="autofocus" placeholder="Email Address" type="email"
+               #email="ngModel"
+               [ngClass]="{ 'is-invalid': ngForm.submitted && email.invalid }"
+               [(ngModel)]="model.userEmail"
+               pattern="^[+a-z0-9._-]+@[a-z0-9_-]+\.[a-z]{2,}$"
+               required/>
+        <input class="form-control" name="Password" autocomplete="off" placeholder="Password" type="password"
+               #password="ngModel"
+               [ngClass]="{ 'is-invalid': ngForm.submitted && password.invalid }"
+               [(ngModel)]="model.password"
+               required/>
+        <button type="submit">login</button>
+        <p class="message">Not registered? <a class="register-link" (click)="changeForm()">Create an account</a></p>
+      </form>
+    </div>
   </div>
 </div>
+
