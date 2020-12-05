@@ -20,7 +20,7 @@ namespace MedievalIo.Server.Client
             _jsonSerializer = new NewtonsoftJsonSerializer();
         }
 
-        protected async Task<T> SendRequestAsync<T>(ApiRequestModel apiRequestModel, string requestUrl, object requestBody)
+        protected async Task<HttpResponseMessage> SendRequestAsync(ApiRequestModel apiRequestModel, string requestUrl, object requestBody)
         {
             var client = GetOrCreateHttpClient(apiRequestModel.BaseUrl);
 
@@ -31,7 +31,7 @@ namespace MedievalIo.Server.Client
 
             request.Headers.Add(AuthenticationHeaderName, apiRequestModel.Bearer);
 
-            return await SendRequestAsync<T>(client, request);
+            return await client.SendAsync(request);
         }
 
         protected async Task<T> SendPutRequestAsync<T>(ApiRequestModel apiRequestModel, string requestUrl, object requestBody)
@@ -62,17 +62,9 @@ namespace MedievalIo.Server.Client
             return await SendRequestAsync<T>(client, request);
         }
 
-        protected async Task<T> SendRequestAsync<T>(HttpClient httpClient, HttpRequestMessage request)
+        protected async Task<T> GetResponse<T>(HttpResponseMessage response)
         {
-            using (var response = await httpClient.SendAsync(request))
-            {
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new Exception($"Server API throw exception with code {response.StatusCode}: {response.ReasonPhrase}");
-                }
-
-                return await _jsonSerializer.DeserializeAsync<T>(response.Content);
-            }
+            return await _jsonSerializer.DeserializeAsync<T>(response.Content);
         }
 
         private static HttpClient GetOrCreateHttpClient(string baseUrl)
