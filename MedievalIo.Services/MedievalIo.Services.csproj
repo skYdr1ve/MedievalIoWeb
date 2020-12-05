@@ -8,8 +8,4 @@
     <ProjectReference Include="..\MedievalIo.Server.Client\MedievalIo.Server.Client.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\News\" />
-  </ItemGroup>
-
 </Project>

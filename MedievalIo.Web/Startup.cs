@@ -45,7 +45,8 @@ namespace MedievalIoWeb
 
             services.AddScoped<IUserClient, UserClient>();
             services.AddScoped<IUserService, UserService>();
-
+            services.AddScoped<INewsClient, NewsClient>();
+            
             services.AddAuthentication(options =>
                 {
                     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
