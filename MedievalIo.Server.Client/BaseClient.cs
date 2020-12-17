@@ -9,7 +9,7 @@ namespace MedievalIo.Server.Client
 {
     public abstract class BaseClient
     {
-        private const string AuthenticationHeaderName = "Bearer";
+        private const string AuthenticationHeaderName = "Authorization";
 
         private static readonly ConcurrentDictionary<string, HttpClient> _httpClientsCache = new ConcurrentDictionary<string, HttpClient>();
 
@@ -20,7 +20,21 @@ namespace MedievalIo.Server.Client
             _jsonSerializer = new NewtonsoftJsonSerializer();
         }
 
-        protected async Task<HttpResponseMessage> SendRequestAsync(ApiRequestModel apiRequestModel, string requestUrl, object requestBody)
+        protected async Task<HttpResponseMessage> SendGetRequestAsync(ApiRequestModel apiRequestModel, string requestUrl, object requestBody)
+        {
+            var client = GetOrCreateHttpClient(apiRequestModel.BaseUrl);
+
+            var request = new HttpRequestMessage(HttpMethod.Get, requestUrl)
+            {
+                Content = _jsonSerializer.SerializeAsync(requestBody)
+            };
+
+            if(!string.IsNullOrEmpty(apiRequestModel.Authorization)) request.Headers.Add(AuthenticationHeaderName, apiRequestModel.Authorization);
+
+            return await client.SendAsync(request);
+        }
+
+        protected async Task<HttpResponseMessage> SendPostRequestAsync(ApiRequestModel apiRequestModel, string requestUrl, object requestBody)
         {
             var client = GetOrCreateHttpClient(apiRequestModel.BaseUrl);
 
@@ -29,7 +43,11 @@ namespace MedievalIo.Server.Client
                 Content = _jsonSerializer.SerializeAsync(requestBody)
             };
 
-            request.Headers.Add(AuthenticationHeaderName, apiRequestModel.Bearer);
+
+            if (apiRequestModel.Authorization != null)
+            {
+                request.Headers.Add(AuthenticationHeaderName, apiRequestModel.Authorization);
+            }
 
             return await client.SendAsync(request);
         }

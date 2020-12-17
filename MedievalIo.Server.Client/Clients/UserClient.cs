@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using MedievalIo.Server.Client.Interfaces;
 using MedievalIo.Server.Client.Models;
@@ -17,7 +18,7 @@ namespace MedievalIo.Server.Client.Clients
                 password
 			};
 
-            using (var response = await SendRequestAsync(apiRequestModel, requestUrl, requestBody))
+            using (var response = await SendPostRequestAsync(apiRequestModel, requestUrl, requestBody))
             {
                 if (!response.IsSuccessStatusCode)
                 {
@@ -28,18 +29,38 @@ namespace MedievalIo.Server.Client.Clients
             }
         }
 
-        public async Task<RegisterUserResult> SendRegistrationRequestAsync(ApiRequestModel apiRequestModel, RegistrationRequest contract)
+        public async Task<(bool, string)> SendRegistrationRequestAsync(ApiRequestModel apiRequestModel, RegistrationRequest contract)
 		{
 			var requestUrl = "users";
 
-            using (var response = await SendRequestAsync(apiRequestModel, requestUrl, contract))
+            using (var response = await SendPostRequestAsync(apiRequestModel, requestUrl, contract))
+            {
+                if (!response.IsSuccessStatusCode)
+                {
+                    return (false, response.ReasonPhrase);
+                }
+
+                return (true, "Success");
+            }
+        }
+
+        public async Task<StatisticsResult> GetStatisticsAsync(ApiRequestModel apiRequestModel, string filter)
+        {
+            var requestUrl = "users";
+
+            var requestBody = new
+            {
+                filter
+            };
+
+            using (var response = await SendGetRequestAsync(apiRequestModel, requestUrl, requestBody))
             {
                 if (!response.IsSuccessStatusCode)
                 {
                     throw new Exception($"Server API throw exception with code {response.StatusCode}: {response.ReasonPhrase}");
                 }
 
-                return await GetResponse<RegisterUserResult>(response);
+                return await GetResponse<StatisticsResult>(response);
             }
         }
     }

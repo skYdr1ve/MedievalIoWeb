@@ -7,6 +7,7 @@ import { AuthService } from "../../shared/services/auth.service";
 import { LoginModel } from "../../models/login.model";
 import { RegisterModel } from "../../models/register.model";
 import { MaterialModule } from "../../material-module";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'log-in',
@@ -26,7 +27,8 @@ export class LogInComponent {
 
   constructor(private router: Router,
     private authService: AuthService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -53,39 +55,30 @@ export class LogInComponent {
     if (this.registerForm.invalid) {
       return;
     }
-    console.log(this.registerForm.value);
-    this.authService.register(this.registerForm.value as RegisterModel).subscribe(
-      result => {
-        this.authService.logIn(result,
-          res => {
-            if (res) {
-              this.close();
-              this.router.navigate([this.returnUrl]);
-              return;
-            }
-          });
-      });
+    this.authService.register(this.registerForm.value as RegisterModel).subscribe( result => {
+      if (result) {
+        this.isRegister = false;
+        this.toastr.success('Success');
+        return;
+      }
+
+      this.toastr.error('Error');
+    });
   }
 
   onSubmit(model: NgForm): void {
     this.authService.logIn(model.value,
       result => {
+        console.log(result);
         if (result) {
           this.close();
+          this.toastr.success('Success');
           this.router.navigate([this.returnUrl]);
           return;
         }
-      });
-  }
 
-  onSubmitRegister(model: NgForm): void {
-    this.authService.logIn(model.value,
-      result => {
-        if (result) {
-          this.close();
-          this.router.navigate([this.returnUrl]);
-          return;
-        }
+        this.toastr.error('Error');
+        return 
       });
   }
 

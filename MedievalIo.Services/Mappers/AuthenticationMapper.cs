@@ -15,7 +15,7 @@ namespace MedievalIo.Services.Mappers
         {
             var result = Map(endPoint);
 
-            result.Bearer = $"{token}";
+            result.Authorization = $"Bearer {token}";
 
             return result;
         }

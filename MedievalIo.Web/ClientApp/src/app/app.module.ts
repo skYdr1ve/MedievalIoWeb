@@ -12,7 +12,10 @@ import { AppRoutingModule } from "./app-routing.module";
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from "./material-module";
+import { StatisticsService } from "./shared/services/statistics.service";
 
 @NgModule({
   declarations: [
@@ -27,12 +30,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     RouterModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    MaterialModule
   ],
   providers: [
     ApiService,
     UserSessionManager,
-    AuthService
+    AuthService,
+    StatisticsService
   ],
   bootstrap: [AppComponent]
 })

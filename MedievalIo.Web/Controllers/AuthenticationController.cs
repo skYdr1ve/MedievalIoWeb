@@ -64,16 +64,10 @@ namespace MedievalIoWeb.Controllers
 
         [HttpPost("Register")]
 		public async Task<IActionResult> Register(RegistrationModel model)
-		{
-			try
-			{
-                var registerUserResult = await _userService.RegisterUserAsync(model, AppSettings.UserServiceEndPoint);
-				return Ok(registerUserResult);
-			}
-			catch (Exception ex)
-			{
-				return Ok(false);
-			}
+        {
+            var result = await _userService.RegisterUserAsync(model, AppSettings.UserServiceEndPoint);
+
+			return Ok(result.Item1);
 		}
     }
 }
