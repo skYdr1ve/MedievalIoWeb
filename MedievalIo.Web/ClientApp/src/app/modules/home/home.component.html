@@ -7,7 +7,8 @@
              [attr.src]="model['medivalIo-image']" />
       </div>
     </div>
-
+  </div>
+  <div class="container-fluid">
     <div class="button-group">
       <div class="row news">
         <button class="btn-lg btn-news">
@@ -21,7 +22,7 @@
       </div>
       <div class="row bottom-panel">
         <div class="col-3 bottom-item">
-          <button class="btn-lg btn-stats">
+          <button class="btn-lg btn-stats" (click)="statisticsInfo()">
             <i class="fa fa-bar-chart"></i>
           </button>
         </div>
@@ -37,6 +38,5 @@
         </div>
       </div>
     </div>
-    
   </div>
 </div>

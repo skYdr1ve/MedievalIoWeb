@@ -5,6 +5,7 @@ import { AuthenticatedUserModel } from '../../models/authenticated-user.model';
 import { UserSessionManager } from './user-session.manager';
 import { CookieService } from 'ngx-cookie-service';
 import { RegisterModel } from "../../models/register.model";
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,6 @@ export class AuthService {
     if (loginModel) {
       this.http.post<AuthenticatedUserModel>('Authentication/Login', loginModel).subscribe(result => {
         if (result) {
-          console.log(result);
           this.userSession.startSession(result);
           this.cookieService.set('isAuthorized', 'true');
         }
@@ -51,8 +51,8 @@ export class AuthService {
     });
   }
 
-  register(registerModel: RegisterModel) {
-    return this.http.post<any>('Authentication/Register', registerModel);
+  register(registerModel: RegisterModel): Observable<boolean> {
+    return this.http.post<boolean>('Authentication/Register', registerModel);
   }
 
   

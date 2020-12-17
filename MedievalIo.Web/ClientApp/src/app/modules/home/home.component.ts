@@ -1,5 +1,10 @@
 import { Component, NgModule } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { GameComponentModule } from "../game/game.component";
+import { StatisticsPopupComponent } from "../statistics-popup/statistics-popup.component";
+import { MaterialModule } from "../../material-module";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -9,8 +14,18 @@ import { GameComponentModule } from "../game/game.component";
 export class HomeComponent {
   model: any;
 
+  constructor(public statisticsPopup: MatDialog) {
+  }
+
   ngOnInit() {
     this.model = this.getDefaultModel();
+  }
+
+  statisticsInfo() {
+    this.statisticsPopup.open(StatisticsPopupComponent, {
+      data: {},
+      width: '700px',
+    });
   }
 
   getDefaultModel() {
@@ -25,7 +40,10 @@ export class HomeComponent {
   declarations: [HomeComponent],
   exports: [HomeComponent],
   imports: [
-    GameComponentModule
+    CommonModule,
+    GameComponentModule,
+    MaterialModule,
+    NgbModule
   ]
 })
 export class HomeModule { }

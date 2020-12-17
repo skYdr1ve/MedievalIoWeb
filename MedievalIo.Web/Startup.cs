@@ -45,6 +45,7 @@ namespace MedievalIoWeb
 
             services.AddScoped<IUserClient, UserClient>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IStatisticsService, StatisticsService>();
 
             services.AddAuthentication(options =>
                 {

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using MedievalIo.Server.Client.Models;
 
 namespace MedievalIo.Server.Client.Interfaces
@@ -11,6 +9,8 @@ namespace MedievalIo.Server.Client.Interfaces
     {
         Task<AuthenticateResult> AuthenticateUserAsync(ApiRequestModel apiRequestModel, string userEmail, string password);
 
-        Task<RegisterUserResult> SendRegistrationRequestAsync(ApiRequestModel apiRequestModel, RegistrationRequest contract);
+        Task<(bool, string)> SendRegistrationRequestAsync(ApiRequestModel apiRequestModel, RegistrationRequest contract);
+
+        Task<StatisticsResult> GetStatisticsAsync(ApiRequestModel apiRequestModel, string filter);
     }
 }

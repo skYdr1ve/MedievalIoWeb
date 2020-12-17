@@ -9,6 +9,6 @@ namespace MedievalIo.Services.Interfaces
     {
         Task<AuthenticateResult> AuthenticateUserAsync(LoginModel model, string endPoint);
 
-        Task<bool> RegisterUserAsync(RegistrationModel model, string endPoint);
+        Task<(bool, string)> RegisterUserAsync(RegistrationModel model, string endPoint);
     }
 }

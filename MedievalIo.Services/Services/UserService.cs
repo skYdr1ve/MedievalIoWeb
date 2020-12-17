@@ -23,7 +23,7 @@ namespace MedievalIo.Services.Services
             return await _userClient.AuthenticateUserAsync(apiRequestModel, model.UserEmail, model.Password);
 		}
 
-        public async Task<bool> RegisterUserAsync(RegistrationModel model, string endPoint)
+        public async Task<(bool, string)> RegisterUserAsync(RegistrationModel model, string endPoint)
 		{
 			var apiRequestModel = AuthenticationMapper.MapToApiRequestModel(endPoint);
 
@@ -31,12 +31,7 @@ namespace MedievalIo.Services.Services
 
 			var result = await _userClient.SendRegistrationRequestAsync(apiRequestModel, request);
 
-			if (result != null)
-            {
-                return true;
-            }
-
-            return false;
+            return result;
         }
     }
 }
