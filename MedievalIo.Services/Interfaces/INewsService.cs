@@ -9,10 +9,9 @@ namespace MedievalIo.Services.Interfaces
 {
     public interface INewsService
     {
-        Task<bool> RegisterUserAsync(RegistrationModel model, string endPoint);
         Task<bool> CreateNewsAsync(CreateNewsModel model, string endPoint);
-        Task<IEnumerable<NewsEntity>> ListNewsRequestAsync(ListNewsModel model, string endPoint);
+        Task<IEnumerable<NewsModel>> ListNewsRequestAsync(ListNewsModel model, string endPoint);
         Task<bool> UpdateNewsRequestAsync(UpdateNewsModel model, string endPoint);
-        Task<NewsEntity> ReadNewsRequestAsync(ReadNewsModel model, string endPoint);
+        Task<NewsModel> ReadNewsRequestAsync(ReadNewsModel model, string endPoint);
     }
 }

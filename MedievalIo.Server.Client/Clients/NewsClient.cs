@@ -3,6 +3,7 @@ using MedievalIo.Server.Client.Interfaces;
 using MedievalIo.Server.Client.Models.News.Responces;
 using MedievalIo.Server.Client.Models.News.Requests;
 using MedievalIo.Server.Client.Models;
+using System;
 
 namespace MedievalIo.Server.Client.Clients
 {
@@ -19,14 +20,34 @@ namespace MedievalIo.Server.Client.Clients
 				image_link = model.ImageLink
 			};
 
-			return await SendRequestAsync<CreateNewsResponce>(apiRequestModel, requestUrl, requestBody);
+			using (var response = await SendGetRequestAsync(apiRequestModel, requestUrl, requestBody))
+			{
+				if (!response.IsSuccessStatusCode)
+				{
+					throw new Exception($"Server API throw exception with code {response.StatusCode}: {response.ReasonPhrase}");
+				}
+
+				return await GetResponse<CreateNewsResponce>(response);
+			}
 		}
 
 		public async Task<ListNewsResponce> ListNewsRequestAsync(ApiRequestModel apiRequestModel, ListNewsRequestModel model)
 		{
 			var requestUrl = "/news";
 
-			return await SendGetRequestAsync<ListNewsResponce>(apiRequestModel, requestUrl);
+			var requestBody = new
+			{
+			};
+
+			using (var response = await SendPutRequestAsync(apiRequestModel, requestUrl, requestBody))
+			{
+				if (!response.IsSuccessStatusCode)
+				{
+					throw new Exception($"Server API throw exception with code {response.StatusCode}: {response.ReasonPhrase}");
+				}
+
+				return await GetResponse<ListNewsResponce>(response);
+			}
 		}
 		public async Task<UpdateNewsResponce> UpdateNewsRequestAsync(ApiRequestModel apiRequestModel, UpdateNewsRequestModel model)
 		{
@@ -39,14 +60,34 @@ namespace MedievalIo.Server.Client.Clients
 				image_link = model.ImageLink
 			};
 
-			return await SendPutRequestAsync<UpdateNewsResponce>(apiRequestModel, requestUrl, requestBody);
+			using (var response = await SendPutRequestAsync(apiRequestModel, requestUrl, requestBody))
+			{
+				if (!response.IsSuccessStatusCode)
+				{
+					throw new Exception($"Server API throw exception with code {response.StatusCode}: {response.ReasonPhrase}");
+				}
+
+				return await GetResponse<UpdateNewsResponce>(response);
+			}
 		}
 
 		public async Task<ReadNewsResponce> ReadNewsRequestAsync(ApiRequestModel apiRequestModel, ReadNewsRequestModel model)
 		{
 			var requestUrl = $"/news/{model.Id}";
 
-			return await SendGetRequestAsync<ReadNewsResponce>(apiRequestModel, requestUrl);
+			var requestBody = new
+			{
+			};
+
+			using (var response = await SendGetRequestAsync(apiRequestModel, requestUrl, requestBody))
+			{
+				if (!response.IsSuccessStatusCode)
+				{
+					throw new Exception($"Server API throw exception with code {response.StatusCode}: {response.ReasonPhrase}");
+				}
+
+				return await GetResponse<ReadNewsResponce>(response);
+			}
 		}
 	}
 }
