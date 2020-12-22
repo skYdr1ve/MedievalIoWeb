@@ -1,4 +1,5 @@
 export class AuthenticatedUserModel {
   token: string;
-  role: string;
+  userId: string;
+  isAdmin: string;
 }

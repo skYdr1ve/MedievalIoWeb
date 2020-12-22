@@ -1,0 +1,102 @@
+<h4 mat-dialog-title class="mb-4 shop-title">Shop</h4>
+<mat-divider></mat-divider>
+<div class="container-fluid">
+  <div mat-dialog-content>
+    <div class="row no-gutters vertical-divider">
+      <div class="col-7">
+        <div class="row">
+          <div class="col-lg-5">
+            <div class="product-image mt-2">
+              <img [src]="previewItem.image" class="img-fluid" alt="item">
+            </div>
+          </div>
+          <div class="col-lg-5 offset-lg-1">
+            <div class="flex-column justify-content-center align-items-center mt-4">
+              <div class="product-title">
+                {{previewItem.name}}
+              </div>
+              <div *ngIf="previewItem.onSale" class="on-sale-label mt-2">SALE</div>
+              <div class="product-price">
+                <i class="fa fa-coins product-coins"></i>
+                <div class="ml-1 coins-price product-discounted" *ngIf="previewItem.onSale">
+                  <div *ngIf="previewItem.coinsPrice">{{previewItem.saleCoinsPrice}}</div>
+                  <div *ngIf="!previewItem.coinsPrice">{{previewItem.saleGemsPrice}}</div>
+                </div>
+                <div *ngIf="previewItem.onSale" class="discount">
+                  <sup class="msrp product-msrp" *ngIf="previewItem.coinsPrice">{{previewItem.coinsPrice}}</sup>
+                  <sup class="msrp product-msrp" *ngIf="!previewItem.coinsPrice">{{previewItem.gemsPrice}}</sup>
+                </div>
+                <div class="ml-1 price-coins" *ngIf="!previewItem.onSale">
+                  <div *ngIf="previewItem.coinsPrice">{{previewItem.coinsPrice}}</div>
+                  <div *ngIf="!previewItem.coinsPrice">{{previewItem.gemsPrice}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="flex-column justify-content-center align-items-center mt-3">
+              <div class="product-description">
+                {{previewItem.description}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="row no-gutters ml-1 mr-1 mt-2 mb-2">
+          <div class="col-3">
+            <button class="full-size btn-icon">
+              <i class="fa fa-swords"></i>
+            </button>
+          </div>
+          <div class="col-3">
+            <button class="full-size btn-icon">
+              <i class="fa fa-helmet-battle"></i>
+            </button>
+          </div>
+          <div class="col-3">
+            <button class="full-size btn-icon">
+              <img src="images/armor.svg" class="svg-image"/>
+            </button>
+          </div>
+          <div class="col-3">
+            <button class="full-size btn-icon">
+              <i class="fa fa-shield-alt"></i>
+            </button>
+          </div>
+        </div>
+        <mat-divider class="button-divider"></mat-divider>
+        <div class="col-12">
+          <ul class="list-group overflow-auto mt-2">
+            <div *ngFor="let item of listItems">
+              <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center mb-1" (click)="fullItem(item)">
+                <div class="image-parent">
+                  <div *ngIf="item.onSale" class="on-sale">SALE</div>
+                  <img [src]="item.image" class="img-fluid" alt="item">
+                </div>
+                <div class="flex-column">
+                  <p>{{item.name}}</p>
+                  <div class="product-price">
+                    <i class="fa fa-coins"></i>
+                    <div class="ml-1 price discounted" *ngIf="item.onSale">
+                      <div *ngIf="item.coinsPrice">{{item.saleCoinsPrice}}</div>
+                      <div *ngIf="!item.coinsPrice">{{item.saleGemsPrice}}</div>
+                    </div>
+                    <div *ngIf="item.onSale" class="discount">
+                      <sup class="msrp" *ngIf="item.coinsPrice">{{item.coinsPrice}}</sup>
+                      <sup class="msrp" *ngIf="!item.coinsPrice">{{item.gemsPrice}}</sup>
+                    </div>
+                    <div class="ml-1 price margin-top-7" *ngIf="!item.onSale">
+                      <div *ngIf="item.coinsPrice">{{item.coinsPrice}}</div>
+                      <div *ngIf="!item.coinsPrice">{{item.gemsPrice}}</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

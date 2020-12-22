@@ -44,8 +44,12 @@ namespace MedievalIoWeb
             AppSettings.CookieExpirationInDays = int.Parse(Configuration["CookieExpirationInDays"]);
 
             services.AddScoped<IUserClient, UserClient>();
+            services.AddScoped<IStoreClient, StoreClient>();
+            services.AddScoped<IWalletClient, WalletClient>();
+            services.AddScoped<IWalletService, WalletService>();;
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IStatisticsService, StatisticsService>();
+            services.AddScoped<IStoreService, StoreService>();
 
             services.AddAuthentication(options =>
                 {
@@ -111,6 +115,7 @@ namespace MedievalIoWeb
                 if (env.IsDevelopment())
                 {
                     spa.UseAngularCliServer(npmScript: "start");
+                    spa.Options.StartupTimeout = TimeSpan.FromSeconds(200);
                 }
             });
         }

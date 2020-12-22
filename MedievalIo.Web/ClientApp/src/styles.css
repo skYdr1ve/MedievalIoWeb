@@ -23,3 +23,13 @@ html {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.statistics-dialog .mat-dialog-container {
+  background: #554a42;
+}
+
+.shop-dialog .mat-dialog-container {
+  background: #554a42;
+  padding-top: 0;
+  padding-bottom: 0;
+}

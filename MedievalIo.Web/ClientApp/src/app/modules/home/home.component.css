@@ -69,3 +69,29 @@ body, html {
 .button-group {
   margin-top: 64px
 }
+
+.coins-gems-panel {
+  display: inline-block;
+  position: absolute;
+  border-radius: 12px;
+  background-color: #7d6d61;
+  color: rgba(52,52,52,0.75);
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 19px;
+  height: 40px;
+  width: 95px;
+  text-align: center;
+}
+
+.fa-coins {
+  font-size: 25px;
+  margin-top: 8px;
+  color: #ffc800;
+}
+
+.fa-gem {
+  font-size: 25px;
+  margin-top: 8px;
+  color: #30d5c8;
+}

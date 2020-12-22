@@ -11,5 +11,8 @@ namespace MedievalIo.Services.Models.Store
         public int CoinsPrice { get; set; }
         public int GemsPrice { get; set; }
         public string ImageId { get; set; }
+        public bool OnSale { get; set; }
+        public int SaleCoinsPrice { get; set; }
+        public int SaleGemsPrice { get; set; }
     }
 }

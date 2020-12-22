@@ -16,6 +16,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from "./material-module";
 import { StatisticsService } from "./shared/services/statistics.service";
+import { StoreService } from "./shared/services/store.service";
+import { WalletService } from "./shared/services/wallet.service";
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { StatisticsService } from "./shared/services/statistics.service";
     ApiService,
     UserSessionManager,
     AuthService,
-    StatisticsService
+    StatisticsService,
+    StoreService,
+    WalletService
   ],
   bootstrap: [AppComponent]
 })

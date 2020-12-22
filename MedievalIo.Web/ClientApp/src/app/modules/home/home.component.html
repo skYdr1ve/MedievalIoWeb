@@ -1,5 +1,15 @@
 <div class="bg"
      [style.background-image]="'url('+ model['background-image'] +')'">
+  <div class="coins-gems-panel" *ngIf="walletModel">
+    <i class="fa fa-coins"></i>
+    <div class="ml-1 price-coins">
+      {{walletModel.coins}}
+    </div>
+    <i class="fa fa-gem"></i>
+    <div class="ml-1 price-coins">
+      {{walletModel.gems}}
+    </div>
+  </div>
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
       <div class="col-md-12 ftco-animate text-center fadeInUp ftco-animated">
@@ -32,7 +42,7 @@
           </button>
         </div>
         <div class="col-3 bottom-item" style="text-align: right">
-          <button class="btn-lg btn-stats">
+          <button class="btn-lg btn-stats" (click)="shop()">
             <i class="fa fa-shopping-cart"></i>
           </button>
         </div>

@@ -72,13 +72,12 @@ export class LogInComponent {
         console.log(result);
         if (result) {
           this.close();
-          this.toastr.success('Success');
+          this.toastr.success('Logged in!', 'Success');
           this.router.navigate([this.returnUrl]);
           return;
         }
 
-        this.toastr.error('Error');
-        return 
+        this.toastr.error('User email or password is invalid.', 'Error');
       });
   }
 

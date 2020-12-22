@@ -7,6 +7,8 @@ namespace MedievalIoWeb.Controllers
     [Route("api/[controller]")]
     public class ApiController : ControllerBase
     {
+        protected string Id => User.FindFirst(AuthenticationConstants.Id)?.Value;
+
         protected string UserToken => User.FindFirst(AuthenticationConstants.Token)?.Value;
 
         protected string UserRole => User.FindFirst(AuthenticationConstants.Role)?.Value;

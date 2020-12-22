@@ -8,12 +8,15 @@ import { Subject } from 'rxjs';
 export class UserSessionManager {
 
   private static userTokenStorageKey = 'userToken';
-  private static userRoleNameStorageKey = 'userRole';
+  private static userIdStorageKey = 'userId';
+  private static userRoleNameStorageKey = 'isAdmin';
 
   private _userToken: string;
-  private _userRole: string;
+  private _userId: string;
+  private _isAdmin: string;
   private _userAuthorized = new Subject<boolean>();
 
+  userAuthorized = this._userAuthorized.asObservable();
 
   get isLoggedIn(): boolean {
     return this._userToken ? true : false;
@@ -23,8 +26,12 @@ export class UserSessionManager {
     return this._userToken;
   }
 
-  get userRole(): string {
-    return this._userRole;
+  get userId(): string {
+    return this._userId;
+  }
+
+  get isAdmin(): string {
+    return this._isAdmin;
   }
 
   constructor() {
@@ -41,22 +48,22 @@ export class UserSessionManager {
 
   startSession(user: AuthenticatedUserModel) {
     this._userToken = user.token;
-    this._userRole = user.role;
-    console.log(user);
-    console.log(this._userToken);
+    this._userId = user.userId;
+    this._isAdmin = user.isAdmin;
 
     localStorage.setItem(UserSessionManager.userTokenStorageKey, this.userToken);
-    localStorage.setItem(UserSessionManager.userRoleNameStorageKey, this.userRole);
-
-
+    localStorage.setItem(UserSessionManager.userIdStorageKey, this.userId);
+    localStorage.setItem(UserSessionManager.userRoleNameStorageKey, this.isAdmin);
     this._userAuthorized.next(true);
   }
 
   closeSession() {
     this._userToken = null;
-    this._userRole = null;
+    this._userId = null;
+    this._isAdmin = null;
 
     localStorage.removeItem(UserSessionManager.userTokenStorageKey);
+    localStorage.removeItem(UserSessionManager.userIdStorageKey);
     localStorage.removeItem(UserSessionManager.userRoleNameStorageKey);
 
     this._userAuthorized.next(false);
@@ -68,7 +75,11 @@ export class UserSessionManager {
       this._userAuthorized.next(true);
     }
     if (event.key === UserSessionManager.userRoleNameStorageKey) {
-      this._userRole = event.newValue;
+      this._isAdmin = event.newValue;
+      this._userAuthorized.next(true);
+    }
+    if (event.key === UserSessionManager.userIdStorageKey) {
+      this._userId = event.newValue;
       this._userAuthorized.next(true);
     }
   }

@@ -5,6 +5,9 @@ import { StatisticsPopupComponent } from "../statistics-popup/statistics-popup.c
 import { MaterialModule } from "../../material-module";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
+import { ShopPopupComponent } from "../shop-popup/shop-popup.component";
+import { WalletModel } from "../../models/wallet.model";
+import { WalletService } from '../../shared/services/wallet.service';
 
 @Component({
   selector: 'app-home',
@@ -13,18 +16,34 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeComponent {
   model: any;
+  walletModel: WalletModel;
 
-  constructor(public statisticsPopup: MatDialog) {
+  constructor(public statisticsPopup: MatDialog,
+    public shopPopup: MatDialog,
+    private wallet: WalletService) {
   }
 
   ngOnInit() {
     this.model = this.getDefaultModel();
+
+    this.wallet.getWallet().subscribe(result => {
+      this.walletModel = result;
+    });
   }
 
   statisticsInfo() {
     this.statisticsPopup.open(StatisticsPopupComponent, {
       data: {},
+      panelClass: 'statistics-dialog',
       width: '700px',
+    });
+  }
+
+  shop() {
+    this.shopPopup.open(ShopPopupComponent, {
+      data: {},
+      panelClass: 'shop-dialog',
+      width: '1000px',
     });
   }
 

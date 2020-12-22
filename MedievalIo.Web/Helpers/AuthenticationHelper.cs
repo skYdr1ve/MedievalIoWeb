@@ -12,9 +12,9 @@ namespace MedievalIoWeb.Helpers
 {
 	public class AuthenticationHelper
 	{
-		public static async Task CreateSessionCookieAsync(HttpContext httpContext, string token, bool isAdmin)
+		public static async Task CreateSessionCookieAsync(HttpContext httpContext, string token, bool isAdmin, string id)
 		{
-			var claims = GetClaimsList(token, isAdmin);
+			var claims = GetClaimsList(token, isAdmin, id);
 
 			var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -38,11 +38,12 @@ namespace MedievalIoWeb.Helpers
 			await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
 		}
 
-		private static List<Claim> GetClaimsList(string token, bool isAdmin)
+		private static List<Claim> GetClaimsList(string token, bool isAdmin, string id)
 		{
 			return new List<Claim>
 			{
                 new Claim(AuthenticationConstants.Token,  token),
+				new Claim(AuthenticationConstants.Id, id),
 				new Claim(AuthenticationConstants.Role, isAdmin ? "Admin" : "" )
             };
 		}

@@ -3,12 +3,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule, FormGroup, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { ViewChild } from '@angular/core';
 import { MaterialModule } from "../../material-module";
-import { UserModel } from "../../models/user.model";
-import { UserStatsModel } from "../../models/user-stats.model";
 import { StatisticsService } from "../../shared/services/statistics.service";
 
 @Component({

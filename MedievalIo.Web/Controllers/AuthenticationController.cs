@@ -17,21 +17,34 @@ namespace MedievalIoWeb.Controllers
 			_userService = userService;
         }
 
-        [HttpPost("Login")]
+        [HttpGet("User")]
+        public AuthenticatedUserModel GetUser()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return null;
+
+            return new AuthenticatedUserModel
+            {
+                Token = UserToken,
+                UserId = Id,
+                IsAdmin = !string.IsNullOrEmpty(UserRole)
+            };
+        }
+
+		[HttpPost("Login")]
 		public async Task<IActionResult> Login(LoginModel model)
 		{
 			try
 			{
-                AuthenticatedUserModel user = null;
-
-				var result = await _userService.AuthenticateUserAsync(model, AppSettings.UserServiceEndPoint);
+                var result = await _userService.AuthenticateUserAsync(model, AppSettings.UserServiceEndPoint);
 				if (result != null)
 				{
-                    await AuthenticationHelper.CreateSessionCookieAsync(HttpContext, result.Token, result.IsAdmin);
+                    await AuthenticationHelper.CreateSessionCookieAsync(HttpContext, result.Token, result.IsAdmin, result.UserId);
 
-                    user = new AuthenticatedUserModel
+                    var user = new AuthenticatedUserModel
                     {
                         Token = result.Token,
+                        UserId = result.UserId,
                         IsAdmin = result.IsAdmin
                     };
 

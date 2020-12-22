@@ -15,12 +15,12 @@ namespace MedievalIo.Server.Client.JsonSerialization
         {
             var responseContentString = await responseContent.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<T>(responseContentString, new StringEnumConverter());
+            return JsonConvert.DeserializeObject<T>(responseContentString);
         }
 
         public HttpContent SerializeAsync(object requestBody)
         {
-            return new StringContent(JsonConvert.SerializeObject(requestBody, new StringEnumConverter()), Encoding.UTF8, JsonMimeType);
+            return new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, JsonMimeType);
         }
     }
 }
