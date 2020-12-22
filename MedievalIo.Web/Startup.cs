@@ -46,11 +46,12 @@ namespace MedievalIoWeb
             services.AddScoped<IUserClient, UserClient>();
             services.AddScoped<IStoreClient, StoreClient>();
             services.AddScoped<IWalletClient, WalletClient>();
-            services.AddScoped<IWalletService, WalletService>();;
+            services.AddScoped<INewsClient, NewsClient>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<INewsClient, NewsClient>();       
             services.AddScoped<IStatisticsService, StatisticsService>();
             services.AddScoped<IStoreService, StoreService>();
+            services.AddScoped<IWalletService, WalletService>();
+            services.AddScoped<INewsService, NewsService>();
 
             services.AddAuthentication(options =>
                 {

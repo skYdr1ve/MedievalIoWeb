@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using MedievalIo.Server.Client.Interfaces;
-using MedievalIo.Server.Client.Models;
 using MedievalIo.Services.Interfaces;
 using MedievalIo.Services.Mappers;
-using MedievalIo.Services.Models.Authentication;
 using MedievalIo.Services.Models.News;
 
 namespace MedievalIo.Services.Services

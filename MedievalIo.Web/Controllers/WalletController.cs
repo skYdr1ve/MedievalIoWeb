@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using MedievalIo.Services.Interfaces;
-using MedievalIo.Services.Models.Store;
+using MedievalIo.Services.Models.Wallet;
 using Microsoft.AspNetCore.Mvc;
 using MedievalIoWeb.Controllers;
 using MedievalIoWeb.Helpers;
@@ -11,26 +10,19 @@ namespace MedievalIo.Web.Controllers
 {
     public class WalletController : ApiController
     {
-        private readonly IStoreService _storeService;
+        private readonly IWalletService _walletService;
 
-        public StoreController(IStoreService storeService)
+        public WalletController(IWalletService walletService)
         {
-            _storeService = storeService;
+            _walletService = walletService;
         }
 
-        [HttpGet("GetStoreItems")]
-        public async Task<List<StoreItem>> GetStoreItems(string filter)
+        [HttpGet("GetWallet")]
+        public async Task<Wallet> GetWallet()
         {
-            try
-            {
-                var result = await _storeService.GetStoreItemsAsync(filter, AppSettings.UserServiceEndPoint, UserToken);
+            var result = await _walletService.GetAsync(Id, AppSettings.UserServiceEndPoint, UserToken);
 
-                return result;
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            return result;
         }
     }
 }

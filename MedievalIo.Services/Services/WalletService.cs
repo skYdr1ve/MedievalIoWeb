@@ -21,7 +21,7 @@ namespace MedievalIo.Services.Services
 
             var wallet = await _walletClient.GetAsync(apiRequestModel, id);
 
-            return StoreMapper.Map(storeItems);
+            return WalletMapper.Map(wallet);
         }
     }
 }
