@@ -52,6 +52,24 @@ namespace MedievalIo.Server.Client
             return await client.SendAsync(request);
         }
 
+        protected async Task<HttpResponseMessage> SendPutRequestAsync(ApiRequestModel apiRequestModel, string requestUrl, object requestBody)
+        {
+            var client = GetOrCreateHttpClient(apiRequestModel.BaseUrl);
+
+            var request = new HttpRequestMessage(HttpMethod.Put, requestUrl)
+            {
+                Content = _jsonSerializer.SerializeAsync(requestBody)
+            };
+
+
+            if (apiRequestModel.Authorization != null)
+            {
+                request.Headers.Add(AuthenticationHeaderName, apiRequestModel.Authorization);
+            }
+
+            return await client.SendAsync(request);
+        }
+
         protected async Task<T> GetResponse<T>(HttpResponseMessage response)
         {
             return await _jsonSerializer.DeserializeAsync<T>(response.Content);
