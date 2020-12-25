@@ -1,7 +1,6 @@
 language: csharp
 dotnet: 3.1
-install:
-  - dotnet restore
+mono: none
 sudo: false
 services:
     - docker
@@ -13,6 +12,9 @@ branches:
 env:
     global:
         - DOTNET_CLI_TELEMETRY_OPTOUT: 1
+
+install:
+  - dotnet restore
 
 before_script:
     - curl https://cli-assets.heroku.com/install.sh | sudo sh
