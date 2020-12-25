@@ -2,7 +2,7 @@ language: csharp
 dotnet: 3.1
 dist: focal
 mono: none
-sudo: false
+sudo: required
 services:
     - docker
    
