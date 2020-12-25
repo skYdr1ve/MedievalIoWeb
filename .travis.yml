@@ -18,7 +18,7 @@ before_script:
     - docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
 
 script:
-    - 'if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then docker build -f Docker/Dockerfile -t $HEROKU_APP; fi'
+    - 'if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then docker build -f Docker/Dockerfile -t $HEROKU_APP . ; fi'
 
 deploy:   
     provider: script
