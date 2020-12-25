@@ -2,10 +2,30 @@ language: csharp
 
 dotnet: 5.0.100
 sudo: false
-
+services:
+    - docker
+   
+branches:
+    only:
+        - master
+        
 env:
     global:
         - DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
+before_script:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - curl https://cli-assets.heroku.com/install.sh | sudo sh
+    - docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
+
 script:
-    - dotnet build MedievalIoWeb.sln -c Release
+    - 'if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then docker build -f Docker/Dockerfile -t $HEROKU_APP; fi'
+
+deploy:   
+    provider: script
+    script: 
+        docker push registry.heroku.com/$HEROKU_APP/web;
+        heroku container:release web --app $HEROKU_APP
+    on:
+        branch: master
+© 2020 GitHub, Inc.
