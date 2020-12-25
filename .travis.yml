@@ -1,5 +1,5 @@
 language: csharp
-dotnet: 3.1.10
+dotnet: 5.0.1
 dist: bionic
 mono: none
 sudo: required
