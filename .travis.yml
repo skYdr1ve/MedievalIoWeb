@@ -1,5 +1,6 @@
 language: csharp
 dotnet: 3.1.202
+dist: focal
 mono: none
 sudo: false
 services:
