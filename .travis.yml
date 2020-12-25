@@ -14,7 +14,6 @@ env:
         - DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
 before_script:
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - curl https://cli-assets.heroku.com/install.sh | sudo sh
     - docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
 
