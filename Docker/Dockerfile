@@ -1,10 +1,20 @@
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS build
+ROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
 WORKDIR /app
-COPY ./ ./
 
+# Copy csproj and restore as distinct layers
+COPY *.csproj ./
+RUN dotnet restore
+
+# Copy everything else and build
+COPY . .
 RUN dotnet publish -c Release -o out
 
-FROM mcr.microsoft.com/dotnet/aspnet:5.0
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
-COPY --from=build /app/out .
-CMD ASPNETCORE_URLS=http://*:$PORT dotnet NetCore3WebAPI.dll
+COPY --from=build-env /app/out .
+
+# Run the app on container startup
+# Use your project name for the second parameter
+# e.g. MyProject.dll
+ENTRYPOINT [ "dotnet", "HerokuApp.dll" ]
