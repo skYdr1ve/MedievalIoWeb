@@ -27,4 +27,3 @@ deploy:
         heroku container:release web --app $HEROKU_APP
     on:
         branch: master
-© 2020 GitHub, Inc.
