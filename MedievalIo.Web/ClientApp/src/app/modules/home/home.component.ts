@@ -8,6 +8,9 @@ import { CommonModule } from '@angular/common';
 import { ShopPopupComponent } from "../shop-popup/shop-popup.component";
 import { WalletModel } from "../../models/wallet.model";
 import { WalletService } from '../../shared/services/wallet.service';
+import { NewsPopupComponent } from "../news-popup/news-popup.component";
+import { Subscription } from 'rxjs';
+import { UserSessionManager } from "../../shared/services/user-session.manager";
 
 @Component({
   selector: 'app-home',
@@ -17,18 +20,29 @@ import { WalletService } from '../../shared/services/wallet.service';
 export class HomeComponent {
   model: any;
   walletModel: WalletModel;
+  subscriptions: Subscription[] = [];
 
-  constructor(public statisticsPopup: MatDialog,
+  constructor(private session: UserSessionManager,
+    public statisticsPopup: MatDialog,
     public shopPopup: MatDialog,
+    public newsPopup: MatDialog,
     private wallet: WalletService) {
   }
 
   ngOnInit() {
     this.model = this.getDefaultModel();
+    this.getWallet();
+  }
 
+  getWallet(): void {
     this.wallet.getWallet().subscribe(result => {
+      console.log(result);
       this.walletModel = result;
     });
+    this.subscriptions.push(this.session.walletUpdated.subscribe(wallet => {
+      console.log(wallet);
+      this.walletModel = wallet;
+    }));
   }
 
   statisticsInfo() {
@@ -47,11 +61,25 @@ export class HomeComponent {
     });
   }
 
+  news() {
+    this.newsPopup.open(NewsPopupComponent, {
+      data: {},
+      panelClass: 'news-dialog',
+      width: '700px',
+    });
+  }
+
   getDefaultModel() {
     return {
       ['background-image']: 'images/fon.jpg',
       ['medivalIo-image']: 'images/medievalIo.png'
     };
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => {
+      subscription.unsubscribe();
+    });
   }
 }
 

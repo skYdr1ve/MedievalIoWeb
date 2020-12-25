@@ -32,5 +32,31 @@ namespace MedievalIo.Web.Controllers
                 throw;
             }
         }
+
+        [HttpPost("BuyItem")]
+        public async Task<bool> BuyItem(BuyItemModel model)
+        {
+            return await _storeService.BuyItemAsync(model, AppSettings.UserServiceEndPoint, UserToken);
+        }
+
+        [HttpPost("EquipItem")]
+        public async Task<bool> EquipItem(EquipItemModel model)
+        {
+            return await _storeService.EquipItemAsync(model, AppSettings.UserServiceEndPoint, UserToken);
+        }
+
+        [HttpGet("GetUserItems")]
+        public async Task<List<UserItemInfo>> GetUserItems(string userId)
+        {
+            try
+            {
+                return await _storeService.GetUserItemsAsync(userId, AppSettings.UserServiceEndPoint, UserToken);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

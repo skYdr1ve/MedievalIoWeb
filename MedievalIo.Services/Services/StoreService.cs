@@ -25,5 +25,32 @@ namespace MedievalIo.Services.Services
 
             return StoreMapper.Map(storeItems);
         }
+
+        public async Task<bool> BuyItemAsync(BuyItemModel model, string endPoint, string token)
+        {
+            var apiRequestModel = AuthenticationMapper.MapToApiRequestModel(endPoint, token);
+
+            var requestModel = StoreMapper.Map(model);
+
+            return await _storeClient.BuyItemAsync(apiRequestModel, requestModel);
+        }
+
+        public async Task<bool> EquipItemAsync(EquipItemModel model, string endPoint, string token)
+        {
+            var apiRequestModel = AuthenticationMapper.MapToApiRequestModel(endPoint, token);
+
+            var requestModel = StoreMapper.Map(model);
+
+            return await _storeClient.EquipItemAsync(apiRequestModel, requestModel);
+        }
+
+        public async Task<List<UserItemInfo>> GetUserItemsAsync(string userId, string endPoint, string token)
+        {
+            var apiRequestModel = AuthenticationMapper.MapToApiRequestModel(endPoint, token);
+
+            var usersItems = await _storeClient.GetUserItemsAsync(apiRequestModel, userId);
+
+            return StoreMapper.Map(usersItems);
+        }
     }
 }

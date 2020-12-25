@@ -1,6 +1,7 @@
-export class RegisterModel {
-  name: string;
-  email: string;
-  password: string;
-  confirmedPassword: string;
+export class NewsModel {
+  id: string;
+  createdAt : Date;
+  title: string;
+  description: string;
+  imageLink: string;
 }

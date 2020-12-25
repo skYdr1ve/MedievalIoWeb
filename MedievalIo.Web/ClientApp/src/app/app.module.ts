@@ -18,6 +18,7 @@ import { MaterialModule } from "./material-module";
 import { StatisticsService } from "./shared/services/statistics.service";
 import { StoreService } from "./shared/services/store.service";
 import { WalletService } from "./shared/services/wallet.service";
+import { NewsService } from "./shared/services/news.service";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { WalletService } from "./shared/services/wallet.service";
     AuthService,
     StatisticsService,
     StoreService,
-    WalletService
+    WalletService,
+    NewsService
   ],
   bootstrap: [AppComponent]
 })

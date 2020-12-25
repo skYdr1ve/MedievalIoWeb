@@ -6,7 +6,7 @@
       {{walletModel.coins}}
     </div>
     <i class="fa fa-gem"></i>
-    <div class="ml-1 price-coins">
+    <div class="ml-1 price-gems">
       {{walletModel.gems}}
     </div>
   </div>
@@ -18,10 +18,10 @@
       </div>
     </div>
   </div>
-  <div class="container-fluid">
+  <div class="container-fluid home">
     <div class="button-group">
       <div class="row news">
-        <button class="btn-lg btn-news">
+        <button class="btn-lg btn-news" (click)="news()">
           <i class="fa fa-newspaper-o"></i>
         </button>
       </div>

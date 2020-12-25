@@ -1,10 +1,7 @@
 ﻿using MedievalIo.Server.Client.Models.News;
 using MedievalIo.Server.Client.Models.News.Requests;
-using MedievalIo.Server.Client.Models.News.Responces;
+using MedievalIo.Server.Client.Models.News.Responses;
 using MedievalIo.Services.Models.News;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MedievalIo.Services.Mappers
 {
@@ -52,12 +49,12 @@ namespace MedievalIo.Services.Mappers
 
         #region toServiceModelFromResponce
 
-        public static NewsModel MapCreateNewsResponce(CreateNewsResponce model)
+        public static NewsModel MapCreateNewsResponce(CreateNewsResponse model)
         {
             return MapNewsEntity(model.News);
         }
 
-        public static UpdateNewsModel MapUpdateNewsResponce(UpdateNewsResponce model)
+        public static UpdateNewsModel MapUpdateNewsResponce(UpdateNewsResponse model)
         {
             return new UpdateNewsModel
             {
@@ -65,7 +62,7 @@ namespace MedievalIo.Services.Mappers
             };
         }
 
-        public static ListNewsModel MapListNewsResponce(ListNewsResponce model)
+        public static ListNewsModel MapListNewsResponce(ListNewsResponse model)
         {
             return new ListNewsModel
             {

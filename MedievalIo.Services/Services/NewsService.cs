@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using MedievalIo.Server.Client.Interfaces;
+using MedievalIo.Server.Client.Models.News.Requests;
 using MedievalIo.Services.Interfaces;
 using MedievalIo.Services.Mappers;
 using MedievalIo.Services.Models.News;
@@ -18,9 +19,9 @@ namespace MedievalIo.Services.Services
             _newsClient = newsClient;
         }
 
-        public async Task<bool> CreateNewsAsync(CreateNewsModel model, string endPoint)
+        public async Task<bool> CreateNewsAsync(CreateNewsModel model, string endPoint, string token)
         {
-            var apiRequestModel = AuthenticationMapper.MapToApiRequestModel(endPoint);
+            var apiRequestModel = AuthenticationMapper.MapToApiRequestModel(endPoint, token);
 
             var requestModel = NewsMapper.MapCreateNewsModel(model);
 
@@ -33,20 +34,18 @@ namespace MedievalIo.Services.Services
             return true;
         }
 
-        public async Task<IEnumerable<NewsModel>> ListNewsRequestAsync(ListNewsModel model, string endPoint)
+        public async Task<List<NewsModel>> ListNewsRequestAsync(string endPoint, string token)
         {
-            var apiRequestModel = AuthenticationMapper.MapToApiRequestModel(endPoint);
+            var apiRequestModel = AuthenticationMapper.MapToApiRequestModel(endPoint, token);
 
-            var requestModel = NewsMapper.MapListNewsModel(model);
+            var result = await _newsClient.ListNewsRequestAsync(apiRequestModel, new ListNewsRequestModel());
 
-            var result = await _newsClient.ListNewsRequestAsync(apiRequestModel, requestModel);
-
-            return result.NewsList.Select(x=> NewsMapper.MapNewsEntity(x));
+            return result.NewsList.Select(NewsMapper.MapNewsEntity).ToList();
         }
 
-        public async Task<NewsModel> ReadNewsRequestAsync(ReadNewsModel model, string endPoint)
+        public async Task<NewsModel> ReadNewsRequestAsync(ReadNewsModel model, string endPoint, string token)
         {
-            var apiRequestModel = AuthenticationMapper.MapToApiRequestModel(endPoint);
+            var apiRequestModel = AuthenticationMapper.MapToApiRequestModel(endPoint, token);
 
             var requestModel = NewsMapper.MapReadNewsModel(model);
 
@@ -56,9 +55,9 @@ namespace MedievalIo.Services.Services
 
         }
 
-        public async Task<bool> UpdateNewsRequestAsync(UpdateNewsModel model, string endPoint)
+        public async Task<bool> UpdateNewsRequestAsync(UpdateNewsModel model, string endPoint, string token)
         {
-            var apiRequestModel = AuthenticationMapper.MapToApiRequestModel(endPoint);
+            var apiRequestModel = AuthenticationMapper.MapToApiRequestModel(endPoint, token);
 
             var requestModel = NewsMapper.MapUpdateNewsModel(model);
 

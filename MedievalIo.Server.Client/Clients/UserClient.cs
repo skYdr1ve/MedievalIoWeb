@@ -46,12 +46,9 @@ namespace MedievalIo.Server.Client.Clients
 
         public async Task<StatisticsResult> GetStatisticsAsync(ApiRequestModel apiRequestModel, string filter)
         {
-            var requestUrl = "users";
+            var requestUrl = $"users{filter}";
 
-            var requestBody = new
-            {
-                filter
-            };
+            var requestBody = new { };
 
             using (var response = await SendGetRequestAsync(apiRequestModel, requestUrl, requestBody))
             {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MedievalIo.Services.Interfaces;
 using MedievalIo.Services.Models.Wallet;
 using Microsoft.AspNetCore.Mvc;

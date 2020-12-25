@@ -9,12 +9,9 @@ namespace MedievalIo.Server.Client.Clients
     {
         public async Task<WalletResult> GetAsync(ApiRequestModel apiRequestModel, string id)
         {
-            var requestUrl = "wallet";
+            var requestUrl = $"users/{id}/currencies";
 
-            var requestBody = new
-            {
-                id
-            };
+            var requestBody = new { };
 
             using (var response = await SendGetRequestAsync(apiRequestModel, requestUrl, requestBody))
             {

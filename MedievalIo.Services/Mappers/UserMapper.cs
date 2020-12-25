@@ -24,9 +24,7 @@ namespace MedievalIo.Services.Mappers
         {
             return model.Results.Select(x => new User
             {
-                Id = Guid.Parse(x.Id),
                 Name = x.Name,
-                Email = x.Email,
                 Stats = new UserStats
                 {
                     Id = x.Stats.Id,

@@ -11,23 +11,28 @@ namespace MedievalIoWeb.Controllers
 	public class AuthenticationController : ApiController
 	{
 		private readonly IUserService _userService;
+        private readonly IWalletService _walletService;
 
-        public AuthenticationController(IUserService userService)
+        public AuthenticationController(IUserService userService, IWalletService walletService)
 		{
 			_userService = userService;
+            _walletService = walletService;
         }
 
         [HttpGet("User")]
-        public AuthenticatedUserModel GetUser()
+        public async Task<AuthenticatedUserModel> GetUser()
         {
             if (!User.Identity.IsAuthenticated)
                 return null;
+
+            var wallet = await _walletService.GetAsync(Id, AppSettings.UserServiceEndPoint, UserToken);
 
             return new AuthenticatedUserModel
             {
                 Token = UserToken,
                 UserId = Id,
-                IsAdmin = !string.IsNullOrEmpty(UserRole)
+                IsAdmin = !string.IsNullOrEmpty(UserRole),
+                Wallet = wallet
             };
         }
 

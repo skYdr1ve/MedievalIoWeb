@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedievalIo.Services", "Medi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedievalIo.Server.Client", "MedievalIo.Server.Client\MedievalIo.Server.Client.csproj", "{91CED0B3-189C-4139-AAA1-8EAEF473B3BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{B50A96D8-AE6E-412D-B909-9F1295C1B733}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{91CED0B3-189C-4139-AAA1-8EAEF473B3BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91CED0B3-189C-4139-AAA1-8EAEF473B3BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91CED0B3-189C-4139-AAA1-8EAEF473B3BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B50A96D8-AE6E-412D-B909-9F1295C1B733}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B50A96D8-AE6E-412D-B909-9F1295C1B733}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B50A96D8-AE6E-412D-B909-9F1295C1B733}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B50A96D8-AE6E-412D-B909-9F1295C1B733}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
