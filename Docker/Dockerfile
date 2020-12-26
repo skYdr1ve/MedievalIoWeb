@@ -40,7 +40,7 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1
 ENV PATH $PATH:/root/.dotnet/tools
 RUN dotnet tool install -g dotnet-ef --version 3.1.1
 WORKDIR /app
-COPY --from=build-env /app/out .
+COPY --from=build-env /app.
 
 # Run the app on container startup
 # Use your project name for the second parameter
