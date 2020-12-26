@@ -26,6 +26,7 @@ export class NewsPopupComponent {
 
   ngOnInit(): void {
     this.newsService.getNews().subscribe(result => {
+      console.log(result);
       this.news = result;
     });
   }
@@ -35,6 +36,7 @@ export class NewsPopupComponent {
   }
 
   getDate(date): string {
+    date = new Date(date);
     return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
   }
 }

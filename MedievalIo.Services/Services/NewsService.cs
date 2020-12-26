@@ -40,7 +40,7 @@ namespace MedievalIo.Services.Services
 
             var result = await _newsClient.ListNewsRequestAsync(apiRequestModel, new ListNewsRequestModel());
 
-            return result.NewsList.Select(NewsMapper.MapNewsEntity).ToList();
+            return NewsMapper.Map(result);
         }
 
         public async Task<NewsModel> ReadNewsRequestAsync(ReadNewsModel model, string endPoint, string token)

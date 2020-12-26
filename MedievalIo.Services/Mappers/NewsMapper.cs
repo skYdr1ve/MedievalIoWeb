@@ -1,4 +1,6 @@
-﻿using MedievalIo.Server.Client.Models.News;
+﻿using System.Collections.Generic;
+using System.Linq;
+using MedievalIo.Server.Client.Models.News;
 using MedievalIo.Server.Client.Models.News.Requests;
 using MedievalIo.Server.Client.Models.News.Responses;
 using MedievalIo.Services.Models.News;
@@ -68,6 +70,18 @@ namespace MedievalIo.Services.Mappers
             {
                 
             };
+        }
+
+        public static List<NewsModel> Map(ListNewsResponse model)
+        {
+            return model?.Results?.Select(x=> new NewsModel
+            {
+                Id= x.Id,
+                CreatedAt = x.CreatedAt,
+                Description = x.Description,
+                Title = x.Title,
+                ImageLink = x.ImageLink
+            }).ToList();
         }
 
         //public static ReadNewsRequestModel MapReadNewsModel(ReadNewsModel model)
