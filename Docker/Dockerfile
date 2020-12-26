@@ -45,4 +45,4 @@ COPY --from=build-env /app/out .
 # e.g. MyProject.dll
 RUN mkdir -p /app/ClientApp/dist
 COPY --from=nodebuilder /usr/src/app/dist/. /app/ClientApp/dist/
-ENTRYPOINT [ "dotnet", "HerokuApp.dll" ]
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet HerokuApp.dll
