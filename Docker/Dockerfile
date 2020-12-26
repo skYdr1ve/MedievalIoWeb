@@ -1,6 +1,7 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
 WORKDIR /app
-
+EXPOSE 80
+EXPOSE 443
 # Copy csproj and restore as distinct layers
 COPY . /app
 WORKDIR /app
@@ -22,13 +23,13 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 
 # install and cache app dependencies
-COPY ClientApp/package.json /usr/src/app/package.json
+COPY MedievalIo.Web/ClientApp/package.json /usr/src/app/package.json
 RUN npm install
 RUN npm install -g @angular/cli@1.7.0 --unsafe
 
 # add app
 
-COPY ClientApp/. /usr/src/app
+COPY MedievalIo.Web/ClientApp/. /usr/src/app
 
 RUN npm run build
 
