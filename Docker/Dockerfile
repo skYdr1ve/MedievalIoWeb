@@ -36,7 +36,7 @@ RUN npm run build
 #End Angular build
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/core/3.1
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1
 WORKDIR /app
 COPY --from=build-env /app .
 
