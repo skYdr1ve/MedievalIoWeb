@@ -29,7 +29,7 @@ RUN npm install -g @angular/cli@1.7.0 --unsafe
 
 # add app
 
-COPY ClientApp/. /usr/src/app
+COPY MedievalIo.Web/ClientApp/. /usr/src/app
 
 RUN npm run build
 
