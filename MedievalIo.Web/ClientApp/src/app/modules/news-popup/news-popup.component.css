@@ -90,7 +90,7 @@
 }
 
 .mat-card-image {
-  height: 300px;
+  max-height: 300px;
 }
 
 .mat-card {
