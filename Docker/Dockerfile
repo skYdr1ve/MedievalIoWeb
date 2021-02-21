@@ -1,48 +1,30 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
+RUN apt-get update -yq \
+    && apt-get install curl gnupg -yq \
+    && curl -sL https://deb.nodesource.com/setup_10.x | bash \
+    && apt-get install nodejs -yq
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
-# Copy csproj and restore as distinct layers
-COPY . /app
-WORKDIR /app
-RUN dotnet restore
 
-# Copy everything else and build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+RUN apt-get update -yq \
+    && apt-get install curl gnupg -yq \
+    && curl -sL https://deb.nodesource.com/setup_10.x | bash \
+    && apt-get install nodejs -yq
+WORKDIR /src
+COPY ["MedievalIo.Web/MedievalIo.Web.csproj", "MedievalIo.Web/"]
+COPY ["MedievalIo.Services/MedievalIo.Services.csproj", "MedievalIo.Services/"]
+COPY ["MedievalIo.Server.Client/MedievalIo.Server.Client.csproj", "MedievalIo.Server.Client/"]
+RUN dotnet restore "MedievalIo.Web/MedievalIo.Web.csproj"
 COPY . .
-RUN dotnet publish -c Release -o out
+WORKDIR "/src/MedievalIo.Web"
+RUN dotnet build "MedievalIo.Web.csproj" -c Release -o /app/build
 
-#Angular build
-FROM node as nodebuilder
+FROM build AS publish
+RUN dotnet publish "MedievalIo.Web.csproj" -c Release -o /app/publish
 
-# set working directory
-RUN mkdir /usr/src/app
-WORKDIR /usr/src/app
-
-# add `/usr/src/app/node_modules/.bin` to $PATH
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
-
-
-# install and cache app dependencies
-COPY MedievalIo.Web/ClientApp/package.json /usr/src/app/package.json
-RUN npm install --legacy-peer-deps
-RUN npm install -g @angular/cli --unsafe
-
-# add app
-
-COPY MedievalIo.Web/ClientApp/. /usr/src/app
-
-RUN npm run build
-
-#End Angular build
-
-# Build runtime image
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+FROM base AS final
 WORKDIR /app
-COPY --from=build-env /app .
-
-# Run the app on container startup
-# Use your project name for the second parameter
-# e.g. MyProject.dll
-RUN mkdir -p /app/ClientApp/dist
-COPY --from=nodebuilder /usr/src/app/dist/. /app/ClientApp/dist/
+COPY --from=publish /app/publish .
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet HerokuApp.dll
