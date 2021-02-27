@@ -22,9 +22,7 @@ import { NewsService } from "./shared/services/news.service";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    GameComponent,
-    LogInComponent
+    AppComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
