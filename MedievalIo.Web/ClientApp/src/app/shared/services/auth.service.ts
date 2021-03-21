@@ -23,10 +23,15 @@ export class AuthService {
       });
   }
 
-  restoreUserSession() {
+  restoreUserSession(): void {
     this.http.get<AuthenticatedUserModel>('Authentication/User').subscribe(result => {
+      console.log(result);
       this.userSession.updateSession(result);
     });
+  }
+
+  restoreUserSessionObservable(): Observable<AuthenticatedUserModel> {
+    return this.http.get<AuthenticatedUserModel>('Authentication/User');
   }
 
   logIn(loginModel: LoginModel = null, next?: (value: any) => void) {
@@ -55,5 +60,7 @@ export class AuthService {
     return this.http.post<boolean>('Authentication/Register', registerModel);
   }
 
-  
+  updateSession(user: AuthenticatedUserModel): void {
+    this.userSession.updateSession(user);
+  }
 }

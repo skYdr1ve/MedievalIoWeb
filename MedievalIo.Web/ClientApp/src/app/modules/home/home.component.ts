@@ -11,6 +11,9 @@ import { WalletService } from '../../shared/services/wallet.service';
 import { NewsPopupComponent } from "../news-popup/news-popup.component";
 import { Subscription } from 'rxjs';
 import { UserSessionManager } from "../../shared/services/user-session.manager";
+import { AuthService } from "../../shared/services/auth.service";
+import { ToastrService } from "ngx-toastr";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -23,10 +26,13 @@ export class HomeComponent {
   subscriptions: Subscription[] = [];
 
   constructor(private session: UserSessionManager,
+    private authService: AuthService,
     public statisticsPopup: MatDialog,
     public shopPopup: MatDialog,
     public newsPopup: MatDialog,
-    private wallet: WalletService) {
+    private wallet: WalletService,
+    private toastr: ToastrService,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -66,6 +72,19 @@ export class HomeComponent {
       data: {},
       panelClass: 'news-dialog',
       width: '700px',
+    });
+  }
+
+  play() {
+    this.router.navigate(['game']);
+  }
+
+  logOut() {
+    this.authService.logOut(result => {
+      if (result) {
+        this.toastr.success('Logged out!', 'Success');
+        this.router.navigate(['login']);
+      }
     });
   }
 

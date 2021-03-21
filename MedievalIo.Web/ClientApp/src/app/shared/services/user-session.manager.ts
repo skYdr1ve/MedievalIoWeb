@@ -23,6 +23,7 @@ export class UserSessionManager {
   walletUpdated = this._walletUpdated.asObservable();
 
   get isLoggedIn(): boolean {
+    console.log(this._userToken);
     return this._userToken ? true : false;
   }
 

@@ -23,7 +23,19 @@ namespace MedievalIoWeb.Controllers
         public async Task<AuthenticatedUserModel> GetUser()
         {
             if (!User.Identity.IsAuthenticated)
+            {
                 return null;
+            }
+
+
+            var time = AuthenticationHelper.GetExpiryTimestamp(UserToken);
+
+            if (DateTime.Now.AddHours(1) >= time)
+            {
+                await AuthenticationHelper.RemoveSessionCookieAsync(HttpContext);
+
+                return null;
+            }
 
             var wallet = await _walletService.GetAsync(Id, AppSettings.UserServiceEndPoint, UserToken);
 
