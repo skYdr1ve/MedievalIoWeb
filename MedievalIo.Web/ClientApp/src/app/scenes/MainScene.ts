@@ -5,7 +5,7 @@ import { createCharacterAnims } from "../anims/characterAnims";
 import Enemy from "../enemies/enemy";
 import Player from "../characters/player";
 
-import { sceneEvents } from '../events/EventsCenter'
+import { sceneEvents } from "../events/EventsCenter"
 
 export default class MainScene extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
