@@ -8,3 +8,9 @@ updates:
     labels:
       - "test dependencies"
     open-pull-requests-limit: 20
+  - package-ecosystem: "npm"
+    directory: "/MedievalIo.Web/ClientApp"
+    schedule:
+      interval: "daily"
+    target-branch: "master"
+    open-pull-requests-limit: 20
