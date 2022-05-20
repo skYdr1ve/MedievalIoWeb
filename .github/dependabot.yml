@@ -1,6 +1,6 @@
 version: 2
 updates:
-  - package-ecosystem: "*"
+  - package-ecosystem: "npm, bundler, composer, maven, mix, cargo, gradle, nuget, gomod, docker, elm, gitsubmodule, github-actions, pip, terraform, pub"
     directory: "/MedievalIo.Web/ClientApp"
     schedule:
       interval: "daily"
@@ -8,8 +8,9 @@ updates:
     allow:
       - dependency-type: "production"
     labels:
-      - "test dependencies"
   - package-ecosystem: "npm"
+
+      - "test dependencies"
     directory: "/event-messages-editor"
     schedule:
       interval: "daily"
