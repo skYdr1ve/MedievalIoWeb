@@ -1,6 +1,6 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
+  - package-ecosystem: "*"
     directory: "/MedievalIo.Web/ClientApp"
     schedule:
       interval: "daily"
