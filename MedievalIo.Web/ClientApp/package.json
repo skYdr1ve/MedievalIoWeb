@@ -42,7 +42,7 @@
     "oidc-client": "^1.9.1",
     "phaser": "^3.53.1",
     "popper.js": "^1.16.0",
-    "rxjs": "^6.6.3",
+    "rxjs": "^6.6.7",
     "zone.js": "0.10.3"
   },
   "devDependencies": {
