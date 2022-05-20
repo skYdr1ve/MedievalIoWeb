@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/MedievalIo.Web/ClientApp"
+    schedule:
+      interval: "daily"
+    target-branch: "test"
+    labels:
+      - "test dependencies"
+    open-pull-requests-limit: 20
