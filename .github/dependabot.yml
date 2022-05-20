@@ -5,17 +5,12 @@ updates:
     schedule:
       interval: "daily"
     target-branch: "test"
-    allow:
-      - dependency-type: "production"
     labels:
-  - package-ecosystem: "npm"
-
       - "test dependencies"
+  - package-ecosystem: "npm"
     directory: "/event-messages-editor"
     schedule:
       interval: "daily"
     target-branch: "master"
-    allow:
-      - dependency-type: "production"
     labels:
       - "master dependencies"
