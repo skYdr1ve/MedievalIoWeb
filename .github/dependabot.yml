@@ -1,0 +1,20 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/MedievalIo.Web/ClientApp"
+    schedule:
+      interval: "daily"
+    target-branch: "test"
+    allow:
+      - dependency-type: "production"
+    labels:
+      - "test dependencies"
+  - package-ecosystem: "npm"
+    directory: "/event-messages-editor"
+    schedule:
+      interval: "daily"
+    target-branch: "master"
+    allow:
+      - dependency-type: "production"
+    labels:
+      - "master dependencies"
