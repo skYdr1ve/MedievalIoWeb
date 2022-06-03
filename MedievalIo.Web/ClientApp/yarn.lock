@@ -196,10 +196,10 @@
   dependencies:
     tslib "^2.0.0"
 
-"@angular/core@10.2.3":
-  version "10.2.3"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-10.2.3.tgz#89469c537b304532d6aa8dbb2ea4e1e2ed90e7a6"
-  integrity sha512-mE6nLpul/IJllk0VYrlrP69n0P7JPz+BHYAVobwO5+0EGO65ieTD18DxzfEt4eQgthnM3VQwSZxjW4n9Y1p/dQ==
+"@angular/core@11.0.5":
+  version "11.0.5"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-11.0.5.tgz#b8c448c3cd4f6dae7327cc1ba4ee2aa29c8dbc26"
+  integrity sha512-XAXWQi7R3ucZXQwx9QK5jSKJeQyRJ53u2dQDpr7R5stzeCy1a5hrNOkZLg9zOTTPcth/6+FrOrRZP9SMdxtw3w==
   dependencies:
     tslib "^2.0.0"
 
@@ -9303,10 +9303,10 @@ typescript@4.0.2:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.2.tgz#7ea7c88777c723c681e33bf7988be5d008d05ac2"
   integrity sha512-e4ERvRV2wb+rRZ/IQeb3jm2VxBsirQLpQhdxplZ2MEzGvDkkMmPglecnNDfSUBivMjP93vRbngYYDQqQ/78bcQ==
 
-typescript@^4.0.7:
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.3.tgz#39062d8019912d43726298f09493d598048c1ce3"
-  integrity sha512-qOcYwxaByStAWrBf4x0fibwZvMRG+r4cQoTjbPtUlrWjBHbmCAww1i448U0GJ+3cNNEtebDteo/cHOR3xJ4wEw==
+typescript@^3.9.5:
+  version "3.9.10"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.10.tgz#70f3910ac7a51ed6bef79da7800690b19bf778b8"
+  integrity sha512-w6fIxVE/H1PkLKcCPsFqKE7Kv7QUwhU8qQY2MueZXWx5cPZdwFupLgKK3vntcK98BtNHZtAF4LA/yl2a7k8R6Q==
 
 ua-parser-js@0.7.22:
   version "0.7.22"
